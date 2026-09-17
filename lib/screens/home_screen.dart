@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../data/event_data.dart';
+import '../widgets/event_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,20 +11,26 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Event Booking',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications_outlined),
+            icon: const Icon(
+              Icons.notifications_outlined,
+            ),
           ),
         ],
       ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             const Text(
               'Find Your Next Event',
               style: TextStyle(
@@ -110,6 +118,7 @@ class HomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
                 TextButton(
                   onPressed: () {},
                   child: const Text('See All'),
@@ -119,28 +128,11 @@ class HomeScreen extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            const EventCard(
-              title: 'Music Festival 2026',
-              location: 'Hyderabad',
-              date: '25 October 2026',
-              price: '₹799',
-              icon: Icons.music_note,
-            ),
-
-            const EventCard(
-              title: 'Tech Conference',
-              location: 'Bangalore',
-              date: '8 November 2026',
-              price: '₹1,499',
-              icon: Icons.computer,
-            ),
-
-            const EventCard(
-              title: 'Comedy Night',
-              location: 'Hyderabad',
-              date: '15 November 2026',
-              price: '₹499',
-              icon: Icons.mic,
+            // Event cards
+            ...events.map(
+              (event) => EventCard(
+                event: event,
+              ),
             ),
           ],
         ),
@@ -160,8 +152,12 @@ class HomeScreen extends StatelessWidget {
             label: 'Explore',
           ),
           NavigationDestination(
-            icon: Icon(Icons.confirmation_number_outlined),
-            selectedIcon: Icon(Icons.confirmation_number),
+            icon: Icon(
+              Icons.confirmation_number_outlined,
+            ),
+            selectedIcon: Icon(
+              Icons.confirmation_number,
+            ),
             label: 'Bookings',
           ),
           NavigationDestination(
@@ -191,6 +187,7 @@ class CategoryItem extends StatelessWidget {
       width: 90,
       margin: const EdgeInsets.only(right: 12),
       child: Card(
+        elevation: 1,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -199,80 +196,13 @@ class CategoryItem extends StatelessWidget {
               size: 30,
               color: Colors.deepPurple,
             ),
+
             const SizedBox(height: 8),
-            Text(title),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
-class EventCard extends StatelessWidget {
-  final String title;
-  final String location;
-  final String date;
-  final String price;
-  final IconData icon;
-
-  const EventCard({
-    super.key,
-    required this.title,
-    required this.location,
-    required this.date,
-    required this.price,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          children: [
-            Container(
-              width: 90,
-              height: 90,
-              decoration: BoxDecoration(
-                color: Colors.deepPurple.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(
-                icon,
-                size: 40,
-                color: Colors.deepPurple,
-              ),
-            ),
-
-            const SizedBox(width: 14),
-
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 7),
-                  Text('📅 $date'),
-                  const SizedBox(height: 5),
-                  Text('📍 $location'),
-                  const SizedBox(height: 7),
-                  Text(
-                    price,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple,
-                    ),
-                  ),
-                ],
+            Text(
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],

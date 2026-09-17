@@ -22,7 +22,7 @@ final List<Event> events = [
     time: '10:00 AM',
     price: '₹1,499',
     description:
-        'Meet developers, entrepreneurs and technology enthusiasts at this exciting tech conference.',
+        'Meet developers, entrepreneurs and technology enthusiasts at this exciting technology conference.',
   ),
 
   Event(
