@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import '../models/event.dart';
+import '../screens/event_details_screen.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
-  final VoidCallback? onTap;
 
   const EventCard({
     super.key,
     required this.event,
-    this.onTap,
   });
 
   @override
@@ -16,114 +15,82 @@ class EventCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
-      clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            children: [
-              Container(
-                width: 90,
-                height: 90,
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade100,
-                  borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return EventDetailsScreen(event: event);
+              },
+            ),
+          );
+        },
+        child: ListTile(
+          contentPadding: const EdgeInsets.all(12),
+
+          leading: Container(
+            width: 75,
+            height: 75,
+            decoration: BoxDecoration(
+              color: Colors.deepPurple.shade100,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              _getIcon(),
+              color: Colors.deepPurple,
+              size: 35,
+            ),
+          ),
+
+          title: Text(
+            event.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+            ),
+          ),
+
+          subtitle: Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('📅 ${event.date}'),
+                const SizedBox(height: 4),
+                Text('📍 ${event.location}'),
+                const SizedBox(height: 4),
+                Text(
+                  event.price,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurple,
+                  ),
                 ),
-                child: Icon(
-                  _getEventIcon(event.category),
-                  size: 40,
-                  color: Colors.deepPurple,
-                ),
-              ),
+              ],
+            ),
+          ),
 
-              const SizedBox(width: 14),
-
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      event.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    const SizedBox(height: 7),
-
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.calendar_today_outlined,
-                          size: 14,
-                        ),
-                        const SizedBox(width: 5),
-                        Expanded(
-                          child: Text(
-                            event.date,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 5),
-
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_on_outlined,
-                          size: 15,
-                        ),
-                        const SizedBox(width: 5),
-                        Expanded(
-                          child: Text(
-                            event.location,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 7),
-
-                    Text(
-                      event.price,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.deepPurple,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const Icon(
-                Icons.arrow_forward_ios,
-                size: 16,
-              ),
-            ],
+          trailing: const Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
           ),
         ),
       ),
     );
   }
 
-  IconData _getEventIcon(String category) {
-    switch (category.toLowerCase()) {
+  IconData _getIcon() {
+    switch (event.category.toLowerCase()) {
       case 'music':
         return Icons.music_note;
-      case 'sports':
-        return Icons.sports_soccer;
       case 'technology':
         return Icons.computer;
       case 'comedy':
         return Icons.mic;
+      case 'sports':
+        return Icons.sports_soccer;
       case 'arts':
         return Icons.palette;
       default:
