@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/event.dart';
+import 'booking_screen.dart';
 
 class EventDetailsScreen extends StatelessWidget {
   final Event event;
@@ -129,9 +130,10 @@ class EventDetailsScreen extends StatelessWidget {
               height: 55,
               child: ElevatedButton(
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Booking feature coming next!'),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookingScreen(event: event),
                     ),
                   );
                 },
