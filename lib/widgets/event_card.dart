@@ -57,6 +57,8 @@ class EventCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text('${event.category} • ${event.time}'),
+                const SizedBox(height: 4),
                 Text('📅 ${event.date}'),
                 const SizedBox(height: 4),
                 Text('📍 ${event.location}'),
