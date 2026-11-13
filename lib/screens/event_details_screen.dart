@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/event.dart';
 import 'booking_screen.dart';
+import '../widgets/favorite_button.dart';
 
 class EventDetailsScreen extends StatelessWidget {
   final Event event;
@@ -15,6 +16,7 @@ class EventDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Event Details'),
+        actions: [FavoriteButton(eventId: event.id)],
       ),
 
       body: SingleChildScrollView(

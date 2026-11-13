@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/event.dart';
+import '../data/booking_store.dart';
+import '../models/booking.dart';
+import 'booking_confirmation_screen.dart';
 
 class BookingScreen extends StatefulWidget {
   final Event event;
@@ -34,38 +37,37 @@ class _BookingScreenState extends State<BookingScreen> {
     super.dispose();
   }
 
-  void _confirmBooking() {
+  Future<void> _confirmBooking() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    showDialog<void>(
-      context: context,
-      builder: (dialogContext) {
-        return AlertDialog(
-          icon: const Icon(
-            Icons.check_circle,
-            color: Colors.green,
-            size: 48,
-          ),
-          title: const Text('Booking Confirmed!'),
-          content: Text(
-            'Thank you, ${_nameController.text.trim()}!\n\n'
-            'Event: ${widget.event.title}\n'
-            'Tickets: $_ticketCount\n'
-            'Total: ₹$_totalPrice',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(dialogContext).pop();
-                Navigator.of(context).pop();
-              },
-              child: const Text('Done'),
-            ),
-          ],
-        );
-      },
+    await BookingStore.addBooking(
+      Booking(
+        id: DateTime.now().microsecondsSinceEpoch.toString(),
+        eventId: widget.event.id,
+        eventTitle: widget.event.title,
+        eventDate: widget.event.date,
+        eventLocation: widget.event.location,
+        customerName: _nameController.text.trim(),
+        customerEmail: _emailController.text.trim(),
+        ticketCount: _ticketCount,
+        totalPrice: _totalPrice,
+        bookedAt: DateTime.now(),
+      ),
+    );
+    if (!mounted) return;
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BookingConfirmationScreen(
+          customerName: _nameController.text.trim(),
+          eventTitle: widget.event.title,
+          ticketCount: _ticketCount,
+          totalPrice: _totalPrice,
+        ),
+      ),
     );
   }
 
