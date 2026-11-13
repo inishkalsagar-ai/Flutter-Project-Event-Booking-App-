@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../data/event_data.dart';
 import '../models/event.dart';
 import '../widgets/event_card.dart';
-import '../widgets/favorite_button.dart';
 import 'bookings_screen.dart';
 import 'favorites_screen.dart';
 import 'profile_screen.dart';

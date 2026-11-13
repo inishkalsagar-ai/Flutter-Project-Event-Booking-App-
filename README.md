@@ -1,17 +1,80 @@
-# event_booking_app
+# Event Booking App
 
-A new Flutter project.
+A Flutter application for discovering events, viewing event details, booking tickets and managing saved events.
+
+## Features
+
+- Browse upcoming events with sample event data.
+- Search events by title, category or city.
+- Filter events by category.
+- View event details and ticket prices.
+- Book 1–10 tickets with name and email validation.
+- Calculate the total ticket amount automatically.
+- View a booking confirmation.
+- Save bookings locally and view booking history.
+- Cancel a booking.
+- Add events to favourites and view saved events.
+- Navigate between Home, Explore, Bookings and Profile.
+- Switch between light and dark themes.
+
+## Built With
+
+- Flutter
+- Dart
+- Material 3
+- Shared Preferences for local device storage
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Install Flutter and set up an emulator or connect a device.
+2. Clone this repository:
 
-A few resources to get you started if this is your first Flutter project:
+   ```bash
+   git clone https://github.com/inishkalsagar-ai/Flutter-Project-Event-Booking-App-.git
+   cd Flutter-Project-Event-Booking-App-
+   ```
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+3. Install dependencies:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   ```bash
+   flutter pub get
+   ```
+
+4. Run the application:
+
+   ```bash
+   flutter run
+   ```
+
+## Run Tests
+
+```bash
+flutter analyze
+flutter test
+```
+
+## Project Structure
+
+```text
+lib/
+  data/       Local event data and storage helpers
+  models/     Event and booking models
+  screens/    Home, details, booking, profile and settings screens
+  widgets/    Reusable event and favourite widgets
+  main.dart   Application entry point
+```
+
+## Storage Note
+
+Bookings and favourite event IDs are saved on the device using Shared Preferences. This project is a learning/demo application; it does not connect to a payment gateway or an online booking server.
+
+## Future Improvements
+
+- User authentication
+- Cloud database and account synchronisation
+- Real payment gateway integration
+- Live event listings and seat availability
+
+## License
+
+This project is created for educational and portfolio purposes.
